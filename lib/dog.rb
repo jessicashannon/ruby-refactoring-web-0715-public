@@ -1,3 +1,5 @@
+require 'pry' 
+
 class Dog
   attr_accessor :leash, :plastic_bag, :walking, :vet
 
@@ -24,30 +26,36 @@ class Dog
   end
 
   def owner
-    @owner
+    # binding.pry
+    if @owner.class == Owner
+      @owner
+    else
+      @owner = Owner.new(@owner, self)
+    end
   end
 
   def walking?(owner)
     owner.dog.walking
   end
 
-  def vet_checkup?(owner)
-    owner.dog.vet_checkup
+  def vet_checkup=(*)
+    @vet_checkup = true
+  end
+
+  def vet_checkup?(*)
+    @vet_checkup
   end
 
   # Refactor the following methods as methods in the Owner class!
 
-  def walk(owner)
-    # REFACTOR!
-    owner.dog.leash = true
-    owner.dog.plastic_bag = true
-    owner.dog.walking = true
-  end
+  # def walk(owner)
+  #   # REFACTOR!
+  #   owner.dog.leash = true
+  #   owner.dog.plastic_bag = true
+  #   owner.dog.walking = true
+  # end
 
-  def vet_checkup(owner)
-    # REFACTOR!
-    owner.dog.leash = true
-    owner.dog.plastic_bag = true
-    owner.dog.vet_checkup = true
-  end
+  
 end
+
+barkster = Dog.new("Barkety", "labrador", "Owner Name")
